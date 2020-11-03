@@ -1,12 +1,13 @@
 //Importing the Necessary Packages
 
-import 'package:camera/camera.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'Ans_Key_Screen.dart';
+import 'Multiple_Image_Selector.dart';
 
 //the main function
 void main() => runApp(MyApp());
@@ -33,12 +34,12 @@ class HomePage extends StatefulWidget{
 
 //Defining the Home Page
 class _HomePageState extends State<HomePage>{
-// Defining the images in Camera
+// Accessing the image
   //State variable
 
   Future getImage(ImageSource source) async {
     //accessing the image
-    File _image = await ImagePicker.pickImage(source: source);
+    File _image = await ImagePicker.pickImage(source: source );
     //checking the null image
     if (_image != null) {
       //Cropping image Window
@@ -92,43 +93,57 @@ class _HomePageState extends State<HomePage>{
             mainAxisAlignment: MainAxisAlignment.spaceAround,
 
             children: [
+
               //For Divider
               Divider(),
-              Container(
-                //Area of the Box
-                height: 185,
-                width: 185,
-                alignment: Alignment.bottomLeft,
-                //Inserting the logo
-                decoration: BoxDecoration(
-                  //Shaping thr Box
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10)
-                  ),
-                  //shadow for the box
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 3,
-                      blurRadius: 2,
-                      offset: Offset(0, 3), // changes position of shadow
-                    )
-                  ],
-                  image: DecorationImage(
-                    image: AssetImage('images/marks.png'),
-                  ),
-                ),
+              //For Images Upload
+              GestureDetector(
+                onTap: (){
 
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 55, top: 0, right: 0, bottom: 0),
-                  child: Row(
-                    children: <Widget>[
-                      Text('Checker', style: TextStyle(fontSize: 20),),
+                  //Rerouting to Ans_Key_Screen file
+                  Navigator.push(context , MaterialPageRoute(
+                    // Pushing to Stack Builder
+
+                    builder: (context) => multiple_image(),
+                  ),
+                  );
+                },
+                child: Container(
+                  //Area of the Box
+                  height: 185,
+                  width: 185,
+                  alignment: Alignment.bottomLeft,
+                  //Inserting the logo
+                  decoration: BoxDecoration(
+                    //Shaping thr Box
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                    ),
+                    //shadow for the box
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 3,
+                        blurRadius: 2,
+                        offset: Offset(0, 3), // changes position of shadow
+                      )
                     ],
+                    image: DecorationImage(
+                      image: AssetImage('images/image_upload.png'),
+                    ),
+                  ),
+
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 55, top: 0, right: 0, bottom: 0),
+                    child: Row(
+                      children: <Widget>[
+                        Text('Upload', style: TextStyle(fontSize: 20),),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -140,6 +155,7 @@ class _HomePageState extends State<HomePage>{
               //making a clickable button
               GestureDetector(
                 onTap: (){
+                  //Accessing Image from Camera
                   getImage(ImageSource.camera);
                 },
                 child: Container(

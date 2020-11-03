@@ -5,8 +5,6 @@ class firstscreen extends StatefulWidget{
   _firstscreenState createState() => _firstscreenState();
 }
 
-
-
 class _firstscreenState extends State<firstscreen> {
   //for regestering the MCQ Answers
   List A_selectedIndexs=[];
