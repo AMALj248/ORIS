@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage>{
           compressQuality: 100,
           maxHeight: 700,
           maxWidth: 700,
-          compressFormat: ImageCompressFormat.jpg,
+          compressFormat: ImageCompressFormat.png,
           androidUiSettings: AndroidUiSettings(
               toolbarColor: Colors.white,
               toolbarTitle: 'Crop the Image',
@@ -192,6 +192,7 @@ class _HomePageState extends State<HomePage>{
               //navigating to Answer Key Screen
               GestureDetector(
                 onTap: (){
+                   //Rerouting to Ans_Key_Screen file
                   Navigator.push(context , MaterialPageRoute(
                   // Pushing to Stack Builder
                    builder: (context) => firstscreen(),
