@@ -1,6 +1,5 @@
 //Importing the Necessary Packages
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -8,6 +7,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'Ans_Key_Screen.dart';
 import 'Multiple_Image_Selector.dart';
+
 
 //the main function
 void main() => runApp(MyApp());
@@ -44,7 +44,6 @@ class _HomePageState extends State<HomePage>{
     if (_image != null) {
       //Cropping image Window
       File cropped = await ImageCropper.cropImage(sourcePath: _image.path,
-
           compressQuality: 100,
           maxHeight: 700,
           maxWidth: 700,
@@ -207,10 +206,10 @@ class _HomePageState extends State<HomePage>{
               //navigating to Answer Key Screen
               GestureDetector(
                 onTap: (){
-                   //Rerouting to Ans_Key_Screen file
+                  //Rerouting to Ans_Key_Screen file
                   Navigator.push(context , MaterialPageRoute(
-                  // Pushing to Stack Builder
-                   builder: (context) => firstscreen(),
+                    // Pushing to Stack Builder
+                    builder: (context) => firstscreen(),
                   ),
                   );
                 },
