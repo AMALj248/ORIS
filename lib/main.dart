@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'Ans_Key_Screen.dart';
 import 'Multiple_Image_Selector.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 
 //the main function
@@ -43,25 +44,23 @@ class _HomePageState extends State<HomePage>{
     //checking the null image
     if (_image != null) {
       //Cropping image Window
-      File cropped = await ImageCropper.cropImage(sourcePath: _image.path,
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: _image.path,
           compressQuality: 100,
           maxHeight: 700,
           maxWidth: 700,
           compressFormat: ImageCompressFormat.png,
           androidUiSettings: AndroidUiSettings(
               toolbarColor: Colors.white,
-              toolbarTitle: 'Crop the Image',
-              statusBarColor: Colors.black
+              toolbarTitle: 'Cropping',
+              statusBarColor: Colors.white70,
+              toolbarWidgetColor: Colors.lightBlueAccent,
+
           )
       );
 
-      // else {
-      // image = await ImagePicker.pickImage(source : ImageSource.camera);
-      // }
-      //Setting the New state for cropped image
-      this.setState(() {
-        _image = cropped;
-      });
+      GallerySaver.saveImage(cropped.path);
+
     }
   }
 

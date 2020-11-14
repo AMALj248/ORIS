@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class firstscreen extends StatefulWidget{
@@ -12,6 +14,25 @@ class _firstscreenState extends State<firstscreen> {
   List C_selectedIndexs=[];
   List D_selectedIndexs=[];
 
+void ans_upload ()
+{
+  print("Button Pressed");
+
+  print("Final A {$A_selectedIndexs}");
+  print("Final B {$B_selectedIndexs}");
+  print("Final C {$C_selectedIndexs}");
+  print("Final D {$D_selectedIndexs}");
+
+  // Enconding tp Seperate JSON List
+  var a_list = jsonEncode(A_selectedIndexs);
+  var b_list = jsonEncode(B_selectedIndexs);
+  var c_list = jsonEncode(C_selectedIndexs);
+  var d_list = jsonEncode(D_selectedIndexs);
+
+  // Combining to One List of abcd Format
+  var final_ans = a_list+b_list+c_list+d_list;
+  print("Final Answer Key $final_ans");
+}
   //For Marks Counter
   List Marks_Counter=[];
 
@@ -25,6 +46,15 @@ class _firstscreenState extends State<firstscreen> {
       appBar: AppBar(
         title: Text("Answer Key"),
       ),
+
+      //  Floating Action Button
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: ans_upload,
+        label: Text('Upload'),
+
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
 
 
       //Main Body
@@ -354,7 +384,10 @@ class _firstscreenState extends State<firstscreen> {
                 ),
               )
             ],
+
           );
+          // Uploading the Answer Key
+
         },
         // For spacing between widgets
         separatorBuilder: (BuildContext context, int index) => const Divider( height:20 , thickness : 1 ,indent: 1, endIndent: 5),

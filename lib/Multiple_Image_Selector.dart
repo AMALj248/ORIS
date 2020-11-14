@@ -1,16 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
-
 class multiple_image extends StatefulWidget {
   @override
-  _multiple_imageState createState() =>  _multiple_imageState();
+  _multiple_imageState createState() => _multiple_imageState();
 }
 
 class _multiple_imageState extends State<multiple_image> {
   List<Asset> images = List<Asset>();
   String _error;
+  var first_click = false;
 
   @override
   void initState() {
@@ -58,29 +59,42 @@ class _multiple_imageState extends State<multiple_image> {
 
     setState(() {
       images = resultList;
-      if (error == null) _error = 'No Error Dectected';
+      // changing first click to true
+      first_click = true;
+      if (error == null) _error = 'No Error Detected';
     });
   }
 
+  void upload_selected() {
+    // Uploading to REST API
 
+    print("Number of Images Selected ${images.length}");
+  }
+
+  // Selecting the Images Button
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
         appBar: new AppBar(
-          title: const Text('Images Picker'),
+          // Title Bar
+          title: const Text('Upload Images'),
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // Giving Descional Buttons for Select & Upload
+            first_click != true
+                ? RaisedButton(
+                    child: Text("Pick images"), onPressed: loadAssets)
+                : Expanded(child: buildGridView()),
+
+            // Upload Selected Button if Pick Images was clicked Once
+            if (first_click == true)
             RaisedButton(
-              child: Text("Pick images"),
-              onPressed: loadAssets,
-            ),
-            Expanded(
-              child: buildGridView(),
-            )
+                child: Text('Upload Selected'), onPressed: upload_selected)
           ],
         ),
       ),
