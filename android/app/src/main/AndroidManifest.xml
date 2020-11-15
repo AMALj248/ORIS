@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="amaljogy.test_full_app">
-   <application
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
         android:label="test_full_app"
         android:icon="@mipmap/ic_launcher">
         <activity

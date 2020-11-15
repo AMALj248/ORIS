@@ -1,4 +1,3 @@
-//Importing the Necessary Packages
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,39 +7,37 @@ import 'package:image_picker/image_picker.dart';
 import 'Ans_Key_Screen.dart';
 import 'Multiple_Image_Selector.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 
 //the main function
 void main() => runApp(MyApp());
 
 //My App Prelim Function
-class MyApp extends StatelessWidget{
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home : HomePage() ,
+      home: HomePage(),
     );
     //MaterialApp
   }
 }
 
 //Defining the HomePage
-class HomePage extends StatefulWidget{
+class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
-
 }
 
 //Defining the Home Page
-class _HomePageState extends State<HomePage>{
+class _HomePageState extends State<HomePage> {
 // Accessing the image
   //State variable
 
   Future getImage(ImageSource source) async {
     //accessing the image
-    File _image = await ImagePicker.pickImage(source: source );
+    File _image = await ImagePicker.pickImage(source: source);
     //checking the null image
     if (_image != null) {
       //Cropping image Window
@@ -51,22 +48,24 @@ class _HomePageState extends State<HomePage>{
           maxWidth: 700,
           compressFormat: ImageCompressFormat.png,
           androidUiSettings: AndroidUiSettings(
-              toolbarColor: Colors.white,
-              toolbarTitle: 'Cropping',
-              statusBarColor: Colors.white70,
-              toolbarWidgetColor: Colors.lightBlueAccent,
+            toolbarColor: Colors.white,
+            toolbarTitle: 'Cropping',
+            statusBarColor: Colors.white70,
+            toolbarWidgetColor: Colors.lightBlueAccent,
+          ));
 
-          )
-      );
+      await GallerySaver.saveImage(cropped.path);
+      // Showing User Toast Message
+      Fluttertoast.showToast(msg: "Photo Saved");
 
-      GallerySaver.saveImage(cropped.path);
+
 
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       //Making a AppBar
       appBar: AppBar(
@@ -85,24 +84,22 @@ class _HomePageState extends State<HomePage>{
         itemCount: 1,
         //required constructor
         itemBuilder: (BuildContext context, int index) {
-
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-
             children: [
-
               //For Divider
               Divider(),
               //For Images Upload
               GestureDetector(
-                onTap: (){
-
+                onTap: () {
                   //Rerouting to Ans_Key_Screen file
-                  Navigator.push(context , MaterialPageRoute(
-                    // Pushing to Stack Builder
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      // Pushing to Stack Builder
 
-                    builder: (context) => multiple_image(),
-                  ),
+                      builder: (context) => multiple_image(),
+                    ),
                   );
                 },
                 child: Container(
@@ -117,8 +114,7 @@ class _HomePageState extends State<HomePage>{
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                         bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                    ),
+                        bottomRight: Radius.circular(10)),
                     //shadow for the box
                     boxShadow: [
                       BoxShadow(
@@ -138,25 +134,27 @@ class _HomePageState extends State<HomePage>{
                         left: 55, top: 0, right: 0, bottom: 0),
                     child: Row(
                       children: <Widget>[
-                        Text('Upload', style: TextStyle(fontSize: 20),),
+                        Text(
+                          'Upload',
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
 
-
               //For Divider
               Divider(),
               //Container#2
               //making a clickable button
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   //Accessing Image from Camera
                   getImage(ImageSource.camera);
+
                 },
                 child: Container(
-
                   //Area of the Box
                   height: 185,
                   width: 185,
@@ -169,8 +167,7 @@ class _HomePageState extends State<HomePage>{
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                         bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                    ),
+                        bottomRight: Radius.circular(10)),
                     //shadow for the box
                     boxShadow: [
                       BoxShadow(
@@ -181,21 +178,22 @@ class _HomePageState extends State<HomePage>{
                       )
                     ],
 
-                    image: DecorationImage(
-                        image: AssetImage('images/camera.png')
-                    ),
+                    image:
+                        DecorationImage(image: AssetImage('images/camera.png')),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 55, top: 0, right: 0, bottom: 0),
                     child: Row(
                       children: <Widget>[
-                        Text('Scanner', style: TextStyle(fontSize: 20),),
+                        Text(
+                          'Scanner',
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ],
                     ),
                   ),
                   //Making the button Pressable
-
                 ),
               ),
 
@@ -204,12 +202,14 @@ class _HomePageState extends State<HomePage>{
               //Container#3
               //navigating to Answer Key Screen
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   //Rerouting to Ans_Key_Screen file
-                  Navigator.push(context , MaterialPageRoute(
-                    // Pushing to Stack Builder
-                    builder: (context) => firstscreen(),
-                  ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      // Pushing to Stack Builder
+                      builder: (context) => firstscreen(),
+                    ),
                   );
                 },
                 child: Container(
@@ -225,8 +225,7 @@ class _HomePageState extends State<HomePage>{
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                         bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                    ),
+                        bottomRight: Radius.circular(10)),
                     //shadow for the box
                     boxShadow: [
                       BoxShadow(
@@ -238,15 +237,17 @@ class _HomePageState extends State<HomePage>{
                     ],
 
                     image: DecorationImage(
-                        image: AssetImage('images/answer_key.png')
-                    ),
+                        image: AssetImage('images/answer_key.png')),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 55, top: 0, right: 0, bottom: 0),
+                        left: 45, top: 0, right: 0, bottom: 0),
                     child: Row(
                       children: <Widget>[
-                        Text('Scanner', style: TextStyle(fontSize: 20),),
+                        Text(
+                          'Answer Key',
+                          style: TextStyle(fontSize: 19),
+                        ),
                       ],
                     ),
                   ),
@@ -268,8 +269,7 @@ class _HomePageState extends State<HomePage>{
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                       bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10)
-                  ),
+                      bottomRight: Radius.circular(10)),
                   //shadow for the box
                   boxShadow: [
                     BoxShadow(
@@ -281,15 +281,17 @@ class _HomePageState extends State<HomePage>{
                   ],
 
                   image: DecorationImage(
-                      image: AssetImage('images/settings_2.png')
-                  ),
+                      image: AssetImage('images/Analytics.png')),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 55, top: 0, right: 0, bottom: 0),
                   child: Row(
                     children: <Widget>[
-                      Text('Scanner', style: TextStyle(fontSize: 20),),
+                      Text(
+                        'Analytics',
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ],
                   ),
                 ),
@@ -298,7 +300,8 @@ class _HomePageState extends State<HomePage>{
           );
         },
         // For spacing between widgets
-        separatorBuilder: (BuildContext context, int index) => const Divider( height:15 , thickness : 5 ,indent: 15, endIndent: 15),
+        separatorBuilder: (BuildContext context, int index) =>
+            const Divider(height: 15, thickness: 5, indent: 15, endIndent: 15),
       ),
     );
   }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
+
+
 class multiple_image extends StatefulWidget {
   @override
   _multiple_imageState createState() => _multiple_imageState();
@@ -65,10 +67,12 @@ class _multiple_imageState extends State<multiple_image> {
     });
   }
 
-  void upload_selected() {
-    // Uploading to REST API
+
+  void upload_selected() async {
 
     print("Number of Images Selected ${images.length}");
+
+
   }
 
   // Selecting the Images Button
@@ -78,23 +82,30 @@ class _multiple_imageState extends State<multiple_image> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
-        appBar: new AppBar(
-          // Title Bar
-          title: const Text('Upload Images'),
+        appBar: AppBar(
+          leading: IconButton(
+            // Back Arrow
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          title: Text("Upload Images"),
+          centerTitle: true,
         ),
         body: Column(
+          // Placement of Buttons
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             // Giving Descional Buttons for Select & Upload
             first_click != true
-                ? RaisedButton(
-                    child: Text("Pick images"), onPressed: loadAssets)
+                ? FloatingActionButton.extended(
+                    label: Text("Pick images"), onPressed: loadAssets)
                 : Expanded(child: buildGridView()),
 
             // Upload Selected Button if Pick Images was clicked Once
             if (first_click == true)
-            RaisedButton(
-                child: Text('Upload Selected'), onPressed: upload_selected)
+              FloatingActionButton.extended(
+                  label: Text('Upload Selected'), onPressed: upload_selected),
           ],
         ),
       ),

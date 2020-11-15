@@ -30,6 +30,10 @@ dependencies:
   image_picker:
   multi_image_picker:
   gallery_saver: ^2.0.1
+  fluttertoast: ^7.1.1
+  http: ^0.12.2
+
+
 
 
 
