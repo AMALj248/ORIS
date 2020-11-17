@@ -1,7 +1,11 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:flutter_absolute_path/flutter_absolute_path.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_core/firebase_core.dart';
 
 
 
@@ -9,6 +13,7 @@ class multiple_image extends StatefulWidget {
   @override
   _multiple_imageState createState() => _multiple_imageState();
 }
+
 
 class _multiple_imageState extends State<multiple_image> {
   List<Asset> images = List<Asset>();
@@ -72,6 +77,40 @@ class _multiple_imageState extends State<multiple_image> {
 
     print("Number of Images Selected ${images.length}");
 
+
+   print("File Name ${images[0].name}");
+
+    print("Number of Images Selected ${images.length}");
+
+    // Initalizing Storage Bucket
+    firebase_storage.FirebaseStorage storage =
+    firebase_storage.FirebaseStorage.instanceFor(bucket: 'gs://omr-scanner-b2999.appspot.com');
+
+    // Initialize Firebase
+    await Firebase.initializeApp();
+    print("Button Pressed");
+
+    // Looping though List of Images
+    for (var i=0;i<images.length;i++) {
+      var img_pth = await FlutterAbsolutePath.getAbsolutePath(
+          images[i].identifier);
+      print("Path ${img_pth}");
+
+
+      // Converting the Image_Path to File
+      File file  = new File( img_pth);
+
+
+      // Uploading to Firebase
+       await firebase_storage.FirebaseStorage.instance
+           .ref('uploads/${images[i].name}')
+           .putFile(file);
+
+      // Getting the Image URl
+      var img_url = await firebase_storage.FirebaseStorage.instance.ref('uploads/${images[i].name}').getDownloadURL();
+
+      print("Download URL for Image $i--> ${img_url.toString()}");
+    }
 
   }
 

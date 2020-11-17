@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -50,7 +49,7 @@ class _firstscreenState extends State<firstscreen> {
 
 
 
-     final String url = 'https://5553301751fc.ngrok.io/test/';
+     final String url = 'http://5553301751fc.ngrok.io/test/';
 
      // Converting to JSON Format
     json_frmt data = json_frmt(a_list, b_list, c_list, d_list );

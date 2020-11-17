@@ -8,6 +8,8 @@ import 'Ans_Key_Screen.dart';
 import 'Multiple_Image_Selector.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'Api_Test.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 //the main function
 void main() => runApp(MyApp());
@@ -65,7 +67,7 @@ class _HomePageState extends State<HomePage> {
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    future: Firebase.initializeApp();
     return Scaffold(
       //Making a AppBar
       appBar: AppBar(
@@ -254,45 +256,60 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
+              
+              
+              
               //Container#4
               Divider(),
-              Container(
-                //Area of the Box
-                height: 185,
-                width: 185,
-                //Text Alignment
-                alignment: Alignment.bottomLeft,
+              GestureDetector(
+                onTap: () {
+                  //Rerouting to Ans_Key_Screen file
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      // Pushing to Stack Builder
+                      builder: (context) => Uploader(),
+                    ),
+                  );
+                },
+                child: Container(
+                  //Area of the Box
+                  height: 185,
+                  width: 185,
+                  //Text Alignment
+                  alignment: Alignment.bottomLeft,
 
-                //Image for Logo
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10)),
-                  //shadow for the box
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 3,
-                      blurRadius: 2,
-                      offset: Offset(0, 3), // changes position of shadow
-                    )
-                  ],
-
-                  image: DecorationImage(
-                      image: AssetImage('images/Analytics.png')),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 55, top: 0, right: 0, bottom: 0),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        'Analytics',
-                        style: TextStyle(fontSize: 20),
-                      ),
+                  //Image for Logo
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)),
+                    //shadow for the box
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 3,
+                        blurRadius: 2,
+                        offset: Offset(0, 3), // changes position of shadow
+                      )
                     ],
+
+                    image: DecorationImage(
+                        image: AssetImage('images/Analytics.png')),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 55, top: 0, right: 0, bottom: 0),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          'Analytics',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
