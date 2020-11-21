@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "529120596741",
+    "firebase_url": "https://omr-scanner-b2999.firebaseio.com",
+    "project_id": "omr-scanner-b2999",
+    "storage_bucket": "omr-scanner-b2999.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529120596741:android:30754fcada410e1f901d6c",
+        "android_client_info": {
+          "package_name": "com.geny.omr_scanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529120596741-d069vkkqd8s5i6f02qmlgq95rpg66tmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8pyRCvjle5W6ToqVBPk4pC18v7XePReA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529120596741-d069vkkqd8s5i6f02qmlgq95rpg66tmd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

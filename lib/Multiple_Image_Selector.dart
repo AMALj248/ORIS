@@ -6,7 +6,8 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
+List url_list = [];
 
 
 class multiple_image extends StatefulWidget {
@@ -76,10 +77,7 @@ class _multiple_imageState extends State<multiple_image> {
   void upload_selected() async {
 
     print("Number of Images Selected ${images.length}");
-
-
    print("File Name ${images[0].name}");
-
     print("Number of Images Selected ${images.length}");
 
     // Initalizing Storage Bucket
@@ -100,17 +98,32 @@ class _multiple_imageState extends State<multiple_image> {
       // Converting the Image_Path to File
       File file  = new File( img_pth);
 
+       try {
+         // Uploading to Firebase and taking a ref snapshot
+         firebase_storage.TaskSnapshot snapshot = await firebase_storage
+             .FirebaseStorage.instance
+             .ref('uploads/${images[i].name}')
+             .putFile(file);
+         // print the progress
+         print('Progress: ${(snapshot.totalBytes / snapshot.bytesTransferred) * 100} %');
 
-      // Uploading to Firebase
-       await firebase_storage.FirebaseStorage.instance
-           .ref('uploads/${images[i].name}')
-           .putFile(file);
-
-      // Getting the Image URl
-      var img_url = await firebase_storage.FirebaseStorage.instance.ref('uploads/${images[i].name}').getDownloadURL();
-
-      print("Download URL for Image $i--> ${img_url.toString()}");
+         // Getting the Image URL
+         var img_url = await firebase_storage.FirebaseStorage.instance.ref('uploads/${images[i].name}').getDownloadURL();
+         print("Download URL for Image $i--> ${img_url.toString()}");
+         // To Append to List .insert
+         // To make List of strings/Bracket problem, .toString()
+         url_list.insert(i, img_url.toString());
+         Fluttertoast.showToast(msg: "Photo ${i+1} Uploaded", backgroundColor: Colors.pink[400]);
+       }
+       on firebase_storage.FirebaseException catch(e){
+         print(e);
+       }
     }
+    print("Final Image URL List $url_list");
+    // Showing User Toast Message
+    setState(() {
+      url_list;
+    });
 
   }
 

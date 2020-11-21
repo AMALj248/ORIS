@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -8,8 +7,9 @@ import 'Ans_Key_Screen.dart';
 import 'Multiple_Image_Selector.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'Api_Test.dart';
+import 'Grpahing_Module.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 
 //the main function
 void main() => runApp(MyApp());
@@ -39,13 +39,13 @@ class _HomePageState extends State<HomePage> {
 
   Future getImage(ImageSource source) async {
     //accessing the image
-    File _image = await ImagePicker.pickImage(source: source);
+    // accessing imageQuality 1
+    File _image = await ImagePicker.pickImage(source: source ,imageQuality: 95);
     //checking the null image
     if (_image != null) {
       //Cropping image Window
       File cropped = await ImageCropper.cropImage(
           sourcePath: _image.path,
-          compressQuality: 100,
           maxHeight: 700,
           maxWidth: 700,
           compressFormat: ImageCompressFormat.png,
@@ -60,21 +60,15 @@ class _HomePageState extends State<HomePage> {
       // Showing User Toast Message
       Fluttertoast.showToast(msg: "Photo Saved");
 
-
-
     }
   }
-
 
   @override
   Widget build(BuildContext context) {    future: Firebase.initializeApp();
     return Scaffold(
       //Making a AppBar
       appBar: AppBar(
-        title: Text("App Bar"),
-        leading: Icon(
-          Icons.menu,
-        ),
+        title: Text("OMR"),
       ),
       //Background Color
       backgroundColor: Colors.white,
@@ -99,7 +93,6 @@ class _HomePageState extends State<HomePage> {
                     context,
                     MaterialPageRoute(
                       // Pushing to Stack Builder
-
                       builder: (context) => multiple_image(),
                     ),
                   );
@@ -256,19 +249,17 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              
-              
-              
               //Container#4
               Divider(),
               GestureDetector(
                 onTap: () {
+
                   //Rerouting to Ans_Key_Screen file
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       // Pushing to Stack Builder
-                      builder: (context) => Uploader(),
+                      builder: (context) => Graph_Main_Screen(),
                     ),
                   );
                 },
