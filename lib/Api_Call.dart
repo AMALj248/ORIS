@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:test_full_app/Ans_Key_Screen.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
+import 'Ans_Key_Screen.dart';
 
 
 // Making a Global data to pass on
@@ -54,8 +55,7 @@ Future <void>  ans_get() async {
 
     print("API CALLED");
     // API URL
-    final String url_anaytics = 'https://89d54b366843.ngrok.io/analytics/';
-
+    final String url_anaytics = 'https://coderino.team/analytics/';
 
 
     // Post Request
@@ -70,12 +70,14 @@ Future <void>  ans_get() async {
 
       analysis_data =  jsonDecode(response_big.body);
       print("OMR VALUE = ${analysis_data['OMR_Efficiency']}");
-      length_data_pts = analysis_data.length;
+      length_data_pts = analysis_data['Right_Answers'].length;
 
-      length_data_pts == null ? 0: length_data_pts;
+      //length_data_pts == null ? 0: length_data_pts;
 
       // Toast Messages
       Fluttertoast.showToast(msg: "Analytics Received", backgroundColor: Colors.lightGreen[400]);
+      print("Length of data ${length_data_pts}");
+
 
     }
     catch(e)

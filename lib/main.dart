@@ -11,6 +11,7 @@ import 'Grpahing_Module.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 
+
 //the main function
 void main() => runApp(MyApp());
 
@@ -40,14 +41,14 @@ class _HomePageState extends State<HomePage> {
   Future getImage(ImageSource source) async {
     //accessing the image
     // accessing imageQuality 1
-    File _image = await ImagePicker.pickImage(source: source ,imageQuality: 95);
+    File _image = await ImagePicker.pickImage(source: source, imageQuality: 98);
     //checking the null image
-    if (_image != null) {
+    if ( _image != null) {
       //Cropping image Window
       File cropped = await ImageCropper.cropImage(
           sourcePath: _image.path,
-          maxHeight: 700,
-          maxWidth: 700,
+          maxHeight: 1080,
+          maxWidth:  1920,
           compressFormat: ImageCompressFormat.png,
           androidUiSettings: AndroidUiSettings(
             toolbarColor: Colors.white,
@@ -64,7 +65,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {    future: Firebase.initializeApp();
+  Widget build(BuildContext context) {
+
+
+    future: Firebase.initializeApp();
     return Scaffold(
       //Making a AppBar
       appBar: AppBar(
@@ -174,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                     ],
 
                     image:
-                        DecorationImage(image: AssetImage('images/camera.png')),
+                    DecorationImage(image: AssetImage('images/camera.png')),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -309,7 +313,7 @@ class _HomePageState extends State<HomePage> {
         },
         // For spacing between widgets
         separatorBuilder: (BuildContext context, int index) =>
-            const Divider(height: 15, thickness: 5, indent: 15, endIndent: 15),
+        const Divider(height: 15, thickness: 5, indent: 15, endIndent: 15),
       ),
     );
   }

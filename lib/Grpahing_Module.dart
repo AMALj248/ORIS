@@ -1,10 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:test_full_app/Api_Call.dart';
-import 'Api_Call.dart';
 import 'Graph_Screen_1.dart';
 import 'Graph_Screen_2.dart';
 import 'Graph_Screen_3.dart';

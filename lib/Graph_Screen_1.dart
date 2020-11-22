@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:fl_chart/fl_chart.dart';
 import 'Api_Call.dart';
-
+import 'Multiple_Image_Selector.dart';
 
 var x_axis = [0, 5, 10, 15, 20, 25, 30, 35];
 
@@ -44,8 +44,8 @@ class Stud_data_graph {
   static List<Stud_data_graph> getData() {
     return <Stud_data_graph>[
       // Looping through Values
-      for(var i=0; i<3; i++)
-        Stud_data_graph(x_pt: analysis_data['Enroll_id'][i], y_pt:  analysis_data['Right_Answers'][i]),
+      for(var i=0; i<20; i++)
+        Stud_data_graph(x_pt: analysis_data['Ques_No'][i], y_pt:  analysis_data['Right_Answers'][i]),
 
     ];
   }
@@ -57,7 +57,6 @@ class Grapher extends StatefulWidget {
   @override
   createState() => _GrapherState();
 }
-
 
 // Main Screen Class
 class _GrapherState extends State<Grapher> {
@@ -101,16 +100,16 @@ var data_points = Stud_data_graph.getData();
                     LineChartData(
                       titlesData: LineTitles.getTitles(),
                       minX: 0,
-                      maxX: 11,
+                      maxX: 20,
                       minY: 0,
-                      maxY: 11,
-                      gridData: FlGridData(show: false),
+                      maxY: analysis_data['Enroll_id'].length.toDouble()+1.0,
+                      gridData: FlGridData(show: true),
                       lineBarsData: [
                         // DataPoints
                         LineChartBarData(
 
                  spots: [
-                   for(var i=0; i<3;i++)
+                   for(var i=0; i<length_data_pts;i++)
 
                      // For Plotting the Data
                        FlSpot(data_points[i].x_pt.toDouble() , data_points[i].y_pt.toDouble())
@@ -125,7 +124,6 @@ var data_points = Stud_data_graph.getData();
                         ),
                       ],
                     )),
-
               ),
 
               // Class Average
@@ -180,7 +178,7 @@ var data_points = Stud_data_graph.getData();
                       .height * 0.4,
                   padding: EdgeInsets.only(left: 5, top: 35),
                   child: (
-                      Text("Total Test Takers")
+                      Text("Total Test Takers  ${analysis_data['Enroll_id'].length.toString()}")
                   )
               ),
 

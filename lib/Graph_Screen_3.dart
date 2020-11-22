@@ -23,7 +23,7 @@ class Stud_data_2 {
   static List<Stud_data_2> getData() {
     return <Stud_data_2>[
     // Looping through Values
-    for(var i=0; i<analysis_data['Enroll_id'].length; i++)
+    for(var i=0; i<20; i++)
       Stud_data_2(qno: analysis_data['Ques_No'][i], Accuracy: analysis_data['Accuracy'][i], Difficulty:analysis_data['Difficulty'][i]),
 
     ];

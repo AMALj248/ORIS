@@ -9,6 +9,8 @@ import 'Api_Call.dart';
 // Marks Variable
 var pos_mark=0, neg_mark=0;
 
+
+
 //for Storing  Globally MCQ Answers
 List A_selectedIndexs = [];
 List B_selectedIndexs = [];
@@ -99,7 +101,7 @@ void marks_inc()
    var neg_list = Neg_selectedIndex;
 
 
-   final String url = 'https://89d54b366843.ngrok.io/answ/';
+   final String url = 'https://coderino.team/answ/';
 
    // Converting to JSON Format
    json_frmt data = json_frmt(
@@ -115,14 +117,19 @@ void marks_inc()
    // Encoding to JSON
    String json_data = jsonEncode(data);
 
+
    print("Send ${json_data}");
 
    // Post Request
    try {
+
+
      var response = await http.post(url, body: json_data);
+      var response2 = await http.post(url, body: json_data);
+     print("Response from Server ${response.statusCode}");
 
      // Successful API CALL
-       print("Response from Server ${response.statusCode}");
+       print("Response from Server ${response2.statusCode}");
        // Calling Anlaytics getting function
 
        await ans_get();
