@@ -54,8 +54,6 @@ class firstscreen extends StatefulWidget {
 }
 
 
-
-
 // Main Class
 class _firstscreenState extends State<firstscreen> {
 
@@ -101,7 +99,7 @@ void marks_inc()
    var neg_list = Neg_selectedIndex;
 
 
-   final String url = 'https://coderino.team/answ/';
+   final String url = 'https://fdf04fb1ed9f.ngrok.io/answ/';
 
    // Converting to JSON Format
    json_frmt data = json_frmt(
@@ -123,18 +121,13 @@ void marks_inc()
    // Post Request
    try {
 
-
-     var response = await http.post(url, body: json_data);
-      var response2 = await http.post(url, body: json_data);
+      var response = await http.post(url, body: json_data);
      print("Response from Server ${response.statusCode}");
 
-     // Successful API CALL
-       print("Response from Server ${response2.statusCode}");
-       // Calling Anlaytics getting function
-
-       await ans_get();
      Fluttertoast.showToast(msg: "Answer Key Uploaded", backgroundColor: Colors.greenAccent[400]);
 
+     await ans_get();
+      Fluttertoast.showToast(msg: "Analytics Recieved", backgroundColor: Colors.greenAccent[400]);
    }
    // Exception
   catch(e) {

@@ -8,9 +8,6 @@ import 'Multiple_Image_Selector.dart';
 
 var x_axis = [0, 5, 10, 15, 20, 25, 30, 35];
 
-
-
-
 // Color Gradient for Bell Curve
 List<Color> gradient_clr = [Color(0xff23b6eb), Color(0xff02d39a)];
 
@@ -39,7 +36,6 @@ class Stud_data_graph {
 
 
   Stud_data_graph({this.x_pt, this.y_pt});
-
   // A function that returns Student Data for Rows
   static List<Stud_data_graph> getData() {
     return <Stud_data_graph>[

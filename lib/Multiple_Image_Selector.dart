@@ -135,7 +135,9 @@ class _multiple_imageState extends State<multiple_image> {
     print("Button Pressed");
 
     // Looping though List of Images
+    url_list=[];
     for (var i=0;i<images.length;i++) {
+
       var img_pth = await FlutterAbsolutePath.getAbsolutePath(
           images[i].identifier);
       print("Path ${img_pth}");
@@ -229,7 +231,7 @@ class _multiple_imageState extends State<multiple_image> {
                   setState(() {
                     button_pressed = true;
                   });
-                   },
+                },
                 child: Container(
                     color: button_pressed == false ? Colors.deepOrangeAccent[200] : Colors.deepOrangeAccent[200],
                     height: MediaQuery
@@ -246,9 +248,9 @@ class _multiple_imageState extends State<multiple_image> {
                             controller: class_name,
                             obscureText: false,
                             decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Classroom Name',
-                              hintStyle: TextStyle(color: Colors.white))))
+                                border: InputBorder.none,
+                                hintText: 'Classroom Name',
+                                hintStyle: TextStyle(color: Colors.white))))
                 ),
               ),
 
@@ -260,12 +262,12 @@ class _multiple_imageState extends State<multiple_image> {
                 : Expanded(child: buildGridView()),
 
             if (first_click == true)
-                FloatingActionButton.extended(
-                    label: Text('Upload Selected'), onPressed: upload_selected),
+              FloatingActionButton.extended(
+                  label: Text('Upload Selected'), onPressed: upload_selected),
 
 
 
-              ],
+          ],
         ),
       ),
     );
