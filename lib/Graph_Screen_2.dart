@@ -19,17 +19,17 @@ class Stud_data {
   var id;
   var marks;
   var Score_perc;
-  var omr_acc;
+  var mistake_data;
   var devi_scr;
 
-  Stud_data({this.id, this.marks, this.Score_perc, this.omr_acc, this.devi_scr });
+  Stud_data({this.id, this.marks, this.Score_perc, this.mistake_data, this.devi_scr });
 
   // A function that returns Student Data for Rows
 static List<Stud_data> getData() {
   return <Stud_data>[
     // Looping through Values
     for(var i=0; i<analysis_data['Enroll_id'].length; i++)
-    Stud_data(id: analysis_data['Enroll_id'][i], marks:  analysis_data['Marks'][i], Score_perc: analysis_data['Percentage'][i], omr_acc: analysis_data['OMR_Error'][i], devi_scr: analysis_data['DFA'][i] ),
+    Stud_data(id: analysis_data['Enroll_id'][i], marks:  analysis_data['Marks'][i], Score_perc: analysis_data['Percentage'][i], mistake_data: analysis_data['Ned_Ques'][i], devi_scr: analysis_data['DFA'][i] ),
 
   ];
 }
@@ -73,7 +73,7 @@ SingleChildScrollView databody() {
           ),
 
           DataColumn(
-            label: Text("OMR"),
+            label: Text("Mistakes"),
             numeric: false,
             tooltip: 'OMR Filling Error Made',
           ),
@@ -94,24 +94,24 @@ SingleChildScrollView databody() {
                    Text(user.id.toString())
                  ),
 
-                 // Cell 2
+                 // Cell 1
                  DataCell(
                     Text (user.marks.toString()),
                  ),
 
-                 // Cell 2
+                 // Cell 1
                  DataCell(
                      Text(user.Score_perc.toString())
                  ),
 
-                 // Cell 2
+                 // Cell 1
                  DataCell(
-                     Text(user.omr_acc.toString())
+                     Text(user.mistake_data.toString())
                  ),
 
-                 // Cell 2
+                 // Cell 1
                  DataCell(
-                     Text(user.devi_scr.toString()  )
+                     Text(user.devi_scr.toString())
                  ),
 
                ],

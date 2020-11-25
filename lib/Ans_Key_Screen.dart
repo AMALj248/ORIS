@@ -5,9 +5,16 @@ import 'package:http/http.dart' as http;
 import 'Multiple_Image_Selector.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'Api_Call.dart';
+import 'main.dart';
 
 // Marks Variable
 var pos_mark=0, neg_mark=0;
+
+// Number of Questions
+var num_question=19;
+
+// Pattern of Paper
+var pattern_type = 1;
 
 
 
@@ -30,9 +37,11 @@ class json_frmt {
   var ps_mrk;
   var ng_mrk;
   List url_lst=[];
+  var patt;
+  var num_q;
 
 
-  json_frmt(this.a_opt, this.b_opt, this.c_opt, this.d_opt, this.neg_q, this.ps_mrk, this.ng_mrk, this.url_lst);
+  json_frmt(this.a_opt, this.b_opt, this.c_opt, this.d_opt, this.neg_q, this.ps_mrk, this.ng_mrk, this.url_lst,this.patt, this.num_q);
 
   Map toJson() => {
     'A': a_opt,
@@ -42,7 +51,9 @@ class json_frmt {
     'Neg_Ques': neg_q,
     'Neg_Mrk': ng_mrk,
     'Pos_Mrk': ps_mrk,
-    'Url_List': url_lst
+    'Url_List': url_lst,
+    'Pattern': patt,
+    "NoQues": num_q,
 
   };
 }
@@ -57,6 +68,30 @@ class firstscreen extends StatefulWidget {
 // Main Class
 class _firstscreenState extends State<firstscreen> {
 
+  // To Select Question Numbers
+  showPicker_q() {
+
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context)
+        {
+          return CupertinoPicker(
+
+            backgroundColor: Colors.white,
+            onSelectedItemChanged: (value) {
+              setState(() {
+                num_question = value;
+              });
+            },
+            itemExtent: 32.0,
+            children:   [
+              for (var i=1;i<=60;i++)
+                Text('$i'),
+            ],
+          );
+        });
+  }
+
 // To increase Marks
 void marks_inc()
 {
@@ -68,7 +103,6 @@ void marks_inc()
   });
 
 }
-
 
 // To decrease Marks
   void marks_dec()
@@ -91,15 +125,27 @@ void marks_inc()
    print("Final D {$D_selectedIndexs}");
    print("Final Neg {$Neg_selectedIndex}");
 
-   // Enconding tp Seperate JSON List
+
+   // Encoding tp Separate JSON List
    var a_list = A_selectedIndexs;
    var b_list = B_selectedIndexs;
    var c_list = C_selectedIndexs;
    var d_list = D_selectedIndexs;
    var neg_list = Neg_selectedIndex;
+   var final_q_num= num_question;
+
+   // To find Pattern
+   if(num_question>20)
+     setState(() {
+       pattern_type = 2;
+     });
+   else
+     setState(() {
+       pattern_type = 1;
+     });
 
 
-   final String url = 'https://fdf04fb1ed9f.ngrok.io/answ/';
+   final String url = 'https://915278655145.ngrok.io/answ/';
 
    // Converting to JSON Format
    json_frmt data = json_frmt(
@@ -110,7 +156,9 @@ void marks_inc()
        neg_list,
        pos_mark,
        neg_mark,
-       url_list);
+       url_list,
+       pattern_type,
+       final_q_num);
 
    // Encoding to JSON
    String json_data = jsonEncode(data);
@@ -120,14 +168,14 @@ void marks_inc()
 
    // Post Request
    try {
-
+     print("Sending Answer Key");
       var response = await http.post(url, body: json_data);
      print("Response from Server ${response.statusCode}");
 
      Fluttertoast.showToast(msg: "Answer Key Uploaded", backgroundColor: Colors.greenAccent[400]);
 
      await ans_get();
-      Fluttertoast.showToast(msg: "Analytics Recieved", backgroundColor: Colors.greenAccent[400]);
+      Fluttertoast.showToast(msg: "Analytics Received", backgroundColor: Colors.greenAccent[400]);
    }
    // Exception
   catch(e) {
@@ -137,13 +185,30 @@ void marks_inc()
 
 }
 
+// To make sure num_questions is not null
+int num_q_chk(){
+    if (num_question == null)
+      setState(() {
+        num_question=19;
+      });
+    return num_question;
+}
+
   @override
   Widget build(BuildContext context) {
     //Parent Scaffold
     return Scaffold(
+
       //AppBar
       appBar: AppBar(
         title: Text("Answer Key"),
+        backgroundColor: global_color,
+        leading: GestureDetector(
+          onTap: () { showPicker_q();},
+          child: Icon(
+            Icons.playlist_add_sharp
+          ),
+        ),
       ),
 
       //  Floating Action Button
@@ -160,6 +225,7 @@ void marks_inc()
               label: Text('Marks'),
               heroTag: null,
               onPressed: marks_inc,
+              backgroundColor: global_color,
               icon: Icon(Icons.add),),
           ),
 
@@ -172,6 +238,7 @@ void marks_inc()
               label: Text('Marks'),
               heroTag: null,
               onPressed: marks_dec,
+              backgroundColor: global_color,
               icon: Icon(Icons.remove),),
           ),
 
@@ -184,6 +251,7 @@ void marks_inc()
               label: Text('Upload'),
               heroTag: null,
               onPressed: ans_upload,
+              backgroundColor:global_color,
               icon: Icon(Icons.storage),),
           ),
 
@@ -195,11 +263,11 @@ void marks_inc()
       body: ListView.separated(
         //For Even Spacing of Rows
         padding: const EdgeInsets.only(left: 0, top: 40, right: 6,bottom: 70),
-        //How many copies of Answers
-        itemCount: 20,
+        //How many Number of questions
+        itemCount: num_q_chk()+1,
         //required constructor
         itemBuilder: (BuildContext context, int index) {
-          // Since index starts from 0
+          // Since ibackgroundColor: global_color,ndex starts from 0
           index = index+1;
 
 
@@ -212,8 +280,6 @@ void marks_inc()
 
 
           return Row(
-
-
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
 
@@ -223,12 +289,12 @@ void marks_inc()
                 //Area of the Box
                 height: 20,
                 width: 30,
-                alignment: Alignment.center,
+                alignment: Alignment.bottomCenter,
                 //Inserting the logo
                 decoration: BoxDecoration(
                   //Shaping thr Box
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(40),
+                  color: Colors.blueGrey[50],
                 ),
 
                 child: Row(
@@ -501,7 +567,7 @@ void marks_inc()
                         //dynamic click color
                         color: neg_isSelected ? Colors.red : Colors.greenAccent,
                         spreadRadius: 3,
-                        blurRadius: 2,
+                        blurRadius: 1,
                         offset: Offset(0, 3), // changes position of shadow
                       )
                     ],
@@ -532,7 +598,7 @@ void marks_inc()
         },
         // For spacing between widgets
         separatorBuilder: (BuildContext context, int index) =>
-            const Divider(height: 20, endIndent: 1),
+            const Divider(height: 20, endIndent: 1,thickness: 0,),
       ),
     );
 

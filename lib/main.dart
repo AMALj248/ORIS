@@ -10,7 +10,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'Grpahing_Module.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
+// For dark mode
+bool dark_bool = true;
+var global_color;
 
 //the main function
 void main() => runApp(MyApp());
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
 
 //Defining the HomePage
 class HomePage extends StatefulWidget {
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -63,16 +66,38 @@ class _HomePageState extends State<HomePage> {
 
     }
   }
-
   @override
+
   Widget build(BuildContext context) {
+
+    // Switch Theme Function and colors Selection
+    void switch_theme(){
+      if(dark_bool == true)
+        setState(() {
+          dark_bool = false;
+          global_color = Colors.black;
+        });
+      else
+        setState(() {
+          dark_bool = true;
+          global_color = Colors.lightBlueAccent;
+        });
+      print("Theme Changed to $dark_bool");
+    }
+
 
 
     future: Firebase.initializeApp();
     return Scaffold(
       //Making a AppBar
       appBar: AppBar(
+        backgroundColor: global_color,
         title: Text("OMR"),
+        leading: GestureDetector(
+          onTap: switch_theme,
+          child: Icon(Icons.wb_sunny_outlined),
+        ),
+
       ),
       //Background Color
       backgroundColor: Colors.white,

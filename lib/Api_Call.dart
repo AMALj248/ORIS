@@ -18,7 +18,7 @@ class json_frmt_big {
   List Right_Answers;
   List Marks ;
   List Percentage;
-  List OMR_Error ;
+  List Ned_Ques ;
   List DFA;
   List Ques_No;
   List Accuracy;
@@ -27,9 +27,9 @@ class json_frmt_big {
   var Top;
   var Weak;
   var Class_Accuracy;
-  var OMR_Efficiency;
 
-  json_frmt_big(this.Enroll_id,this.Right_Answers, this.Marks, this.Percentage, this.OMR_Error, this.DFA, this.Ques_No, this.Accuracy, this.Difficulty, this.Avg_Marks, this.Top, this.Weak, this.Class_Accuracy, this.OMR_Efficiency);
+
+  json_frmt_big(this.Enroll_id,this.Right_Answers, this.Marks, this.Percentage, this.Ned_Ques, this.DFA, this.Ques_No, this.Accuracy, this.Difficulty, this.Avg_Marks, this.Top, this.Weak, this.Class_Accuracy);
 
   json_frmt_big.fromJson (Map <String, dynamic> json ) :
 
@@ -37,16 +37,15 @@ class json_frmt_big {
         Right_Answers = json["Right_Answers"],
         Marks = json["Marks"],
         Percentage = json["Percentage"],
-        OMR_Error = json["OMR_Error"],
+        Ned_Ques = json["Ned_Ques"],
         DFA = json["DFA"],
         Ques_No = json["Ques_No"],
         Accuracy = json["Accuracy"],
         Difficulty = json["Difficulty"],
         Avg_Marks = json["Avg_Marks"],
-        Top = ["Top"],
+        Top = json["Top"],
         Weak = json["Weak"],
-        Class_Accuracy = json["Class_Accuracy"],
-        OMR_Efficiency = json["OMR_Efficiency"];
+        Class_Accuracy = json["Class_Accuracy"];
 
 }
 
@@ -54,8 +53,9 @@ class json_frmt_big {
 Future <void>  ans_get() async {
 
   print("API CALLED");
+  print("Receiving Analytics");
   // API URL
-  final String url_anaytics = 'https://fdf04fb1ed9f.ngrok.io/analytics/';
+  final String url_anaytics = 'https://915278655145.ngrok.io/analytics/';
 
 
   // Post Request
@@ -82,7 +82,117 @@ Future <void>  ans_get() async {
   }
   catch(e)
   {
+    // Remove this in production
+    analysis_data=   { "Enroll_id": [1],
+      "Right_Answers": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Marks": [
+        30
+      ],
+      "Percentage": [
+        150.0
+      ],
+      "OMR_Error": [
+        0
+      ],
+      "DFA": [
+        0.0
+      ],
+      "Ques_No": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "Accuracy": [
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Difficulty": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "Avg_Marks": 1.5,
+      "Top": 1,
+      "Weak": 1,
+      "Class_Accuracy": 75.0,
+      "OMR_Efficiency": 100.0
+    };
+    print("Error Default Value Assigned");
     throw e;
+
   }
 
 

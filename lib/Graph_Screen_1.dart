@@ -5,8 +5,7 @@ import 'dart:io';
 import 'package:fl_chart/fl_chart.dart';
 import 'Api_Call.dart';
 import 'Multiple_Image_Selector.dart';
-
-var x_axis = [0, 5, 10, 15, 20, 25, 30, 35];
+import 'main.dart';
 
 // Color Gradient for Bell Curve
 List<Color> gradient_clr = [Color(0xff23b6eb), Color(0xff02d39a)];
@@ -40,7 +39,8 @@ class Stud_data_graph {
   static List<Stud_data_graph> getData() {
     return <Stud_data_graph>[
       // Looping through Values
-      for(var i=0; i<20; i++)
+      // Looping through Values
+      for(var i=0; i<length_data_pts; i++)
         Stud_data_graph(x_pt: analysis_data['Ques_No'][i], y_pt:  analysis_data['Right_Answers'][i]),
 
     ];
@@ -50,6 +50,7 @@ class Stud_data_graph {
 
 // Parent Class
 class Grapher extends StatefulWidget {
+
   @override
   createState() => _GrapherState();
 }
@@ -64,7 +65,8 @@ var data_points = Stud_data_graph.getData();
 
       //AppBar
       appBar: AppBar(
-        title: Text("Class Perfomance"),
+        title: Text("Class Performance"),
+        backgroundColor: global_color,
 
       ),
 
@@ -79,7 +81,7 @@ var data_points = Stud_data_graph.getData();
 
               // Bell Curve
               Divider(),
-              Text("Bell Curve"),
+              Text("Right Answers Frequency"),
               Padding(
                 padding: EdgeInsets.only(left: 10, top: 10),
               ),
@@ -98,7 +100,7 @@ var data_points = Stud_data_graph.getData();
                       minX: 0,
                       maxX: 20,
                       minY: 0,
-                      maxY: analysis_data['Enroll_id'].length.toDouble()+1.0,
+                      maxY: 20,
                       gridData: FlGridData(show: true),
                       lineBarsData: [
                         // DataPoints
@@ -136,7 +138,7 @@ var data_points = Stud_data_graph.getData();
                       .height * 0.4,
                   padding: EdgeInsets.only(left: 5, top: 35),
                   child: (
-                      Text("Class Average  ${analysis_data['Avg_Marks'].toString()}")
+                      Text("Class Average   ${analysis_data['Avg_Marks'].toString()}")
 
                   )
 
@@ -156,7 +158,7 @@ var data_points = Stud_data_graph.getData();
                       .height * 0.4,
                   padding: EdgeInsets.only(left: 5, top: 35),
                   child: (
-                      Text("Class Accuracy   ${analysis_data['Class_Accuracy'].toString()}")
+                      Text("Class Accuracy  ${analysis_data['Class_Accuracy'].toString()}")
                   )
               ),
 
@@ -172,9 +174,11 @@ var data_points = Stud_data_graph.getData();
                       .of(context)
                       .size
                       .height * 0.4,
-                  padding: EdgeInsets.only(left: 5, top: 35),
+                  padding:EdgeInsets.only(left: 5, top: 35),
                   child: (
                       Text("Total Test Takers  ${analysis_data['Enroll_id'].length.toString()}")
+
+
                   )
               ),
 
@@ -183,6 +187,7 @@ var data_points = Stud_data_graph.getData();
           label: Text('Get Analytics'),
           heroTag: null,
           onPressed: (ans_get) ,
+          backgroundColor: global_color,
           icon: Icon(Icons.padding),),
 
           ],

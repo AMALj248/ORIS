@@ -10,6 +10,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert' show utf8;
 import 'dart:typed_data' show Uint8List;
+import 'main.dart';
+
 List url_list = [];
 List classes = [];
 List num_of_stud =[];
@@ -184,6 +186,7 @@ class _multiple_imageState extends State<multiple_image> {
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
         appBar: AppBar(
+          backgroundColor: global_color,
           leading: IconButton(
             // Back Arrow
             icon: Icon(Icons.arrow_back, color: Colors.white),
@@ -201,7 +204,7 @@ class _multiple_imageState extends State<multiple_image> {
 
             // Total Students Box
             Container(
-                color: Colors.deepOrangeAccent[200] ,
+                color: Colors.orange ,
                 height: MediaQuery
                     .of(context)
                     .size
@@ -233,7 +236,7 @@ class _multiple_imageState extends State<multiple_image> {
                   });
                 },
                 child: Container(
-                    color: button_pressed == false ? Colors.deepOrangeAccent[200] : Colors.deepOrangeAccent[200],
+                    color: Colors.green,
                     height: MediaQuery
                         .of(context)
                         .size
@@ -258,11 +261,13 @@ class _multiple_imageState extends State<multiple_image> {
             // Giving Smart Buttons for Select & Upload
             first_click != true
                 ? FloatingActionButton.extended(
+              backgroundColor: global_color,
                 label: Text("Pick images"), onPressed: loadAssets)
                 : Expanded(child: buildGridView()),
 
             if (first_click == true)
               FloatingActionButton.extended(
+                  backgroundColor: global_color,
                   label: Text('Upload Selected'), onPressed: upload_selected),
 
 
