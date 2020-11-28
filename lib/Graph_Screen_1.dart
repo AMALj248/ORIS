@@ -17,7 +17,6 @@ class LineTitles {
 
     // X Axis Title
     bottomTitles: SideTitles(
-
       showTitles: true,
     ),
 
@@ -98,9 +97,9 @@ var data_points = Stud_data_graph.getData();
                     LineChartData(
                       titlesData: LineTitles.getTitles(),
                       minX: 0,
-                      maxX: 20,
+                      maxX: length_data_pts.toDouble(),
                       minY: 0,
-                      maxY: 20,
+                      maxY: analysis_data['Enroll_id'].length.toDouble(),
                       gridData: FlGridData(show: true),
                       lineBarsData: [
                         // DataPoints

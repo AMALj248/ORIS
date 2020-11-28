@@ -8,7 +8,7 @@ import 'main.dart';
 
 
 // Student ID
-var cur_stud_id=1;
+var cur_stud_id=0;
 // Parent Class
 class Fourth_Screen extends StatefulWidget {
   @override
@@ -18,18 +18,22 @@ class Fourth_Screen extends StatefulWidget {
 //Making the DataTable Rows Template
 class Stud_data_2 {
   var qno;
-  var Accuracy;
-  var Difficulty;
+  var Marked;
+  var act_ans;
 
-  Stud_data_2({this.qno, this.Accuracy, this.Difficulty});
+
+  Stud_data_2({this.qno, this.Marked, this.act_ans});
 
   // A function that returns Student Data for Rows
   static List<Stud_data_2> getData() {
     return <Stud_data_2>[
-      // Looping through Values
-        Stud_data_2(qno: analysis_data['Ques_No'][cur_stud_id], Accuracy: analysis_data['Accuracy'][cur_stud_id], Difficulty:analysis_data['Difficulty'][cur_stud_id]),
+      // Looping through Values for Student Responses
 
-    ];
+        for(var j=1;j<=analysis_data['answ'][cur_stud_id].length;j++)
+              (
+            Stud_data_2(qno: j, Marked: analysis_data['answ'][cur_stud_id]['$j'], act_ans: analysis_data['answ_key'][0]['$j'])
+                    )
+          ];
   }
 }
 
@@ -60,9 +64,9 @@ SingleChildScrollView databody() {
         ),
 
         DataColumn(
-          label: Text("Answer"),
+          label: Text("Answer Key"),
           numeric: false,
-          tooltip: 'Actual Answer',
+          tooltip: 'Answer Key Options',
         ),
 
       ],
@@ -78,12 +82,12 @@ SingleChildScrollView databody() {
 
             // Cell 2
             DataCell(
-              Text (user.Accuracy.toString()),
+              Text (user.Marked.toString()),
             ),
 
-            // Cell 2
+            // Cell 3
             DataCell(
-                Text(user.Difficulty.toString())
+              Text (user.act_ans.toString()),
             ),
 
           ],
@@ -98,8 +102,8 @@ SingleChildScrollView databody() {
 // Main Screen Class
 class _Fourth_Screen extends State<Fourth_Screen> {
   // Scrollable Student ID
-  showPicker() {
 
+  showPicker() {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context)
@@ -108,12 +112,12 @@ class _Fourth_Screen extends State<Fourth_Screen> {
             backgroundColor: Colors.white,
             onSelectedItemChanged: (value) {
               setState(() {
-                cur_stud_id = value-1 ;
+                cur_stud_id = value ;
               });
             },
             itemExtent: 32.0,
             children:   [
-              for (var i=1;i<analysis_data['Enroll_id'].length+1;i++)
+              for (var i=1;i<=analysis_data['answ'].length;i++)
                 Text('$i'),
             ],
           );
@@ -121,11 +125,12 @@ class _Fourth_Screen extends State<Fourth_Screen> {
   }
   @override
   Widget build(BuildContext context) {
-
+    print('Current Id $cur_stud_id');
+    print("Amal ${analysis_data['answ'][0]['5']}");
     // Next student
     void  stud_next(){
       setState(() {
-        if(cur_stud_id<analysis_data['Enroll_id'].length) {
+        if(cur_stud_id<analysis_data['Enroll_id'].length-1) {
           print("Next Student = $cur_stud_id");
           cur_stud_id++;
         }
@@ -214,16 +219,16 @@ class _Fourth_Screen extends State<Fourth_Screen> {
           return Column(
             // Main Container
             children: [
-              // Class Average
-              Divider(),
               // Making the Data Table
               databody(),
+              Divider(),
+              Divider(),
             ],
           );
         },
         // For spacing between widgets
         separatorBuilder: (BuildContext context, int index) =>
-        const Divider(height: 15, thickness: 5, indent: 15, endIndent: 15),
+        const Divider(height: 15, thickness: 10, indent: 15, endIndent: 15),
       ),
     );
   }

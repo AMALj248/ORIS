@@ -11,10 +11,11 @@ import 'main.dart';
 var pos_mark=0, neg_mark=0;
 
 // Number of Questions
-var num_question=19;
+var num_question;
 
 // Pattern of Paper
 var pattern_type = 1;
+
 
 
 
@@ -80,7 +81,7 @@ class _firstscreenState extends State<firstscreen> {
             backgroundColor: Colors.white,
             onSelectedItemChanged: (value) {
               setState(() {
-                num_question = value;
+                num_question = value+1;
               });
             },
             itemExtent: 32.0,
@@ -139,13 +140,13 @@ void marks_inc()
      setState(() {
        pattern_type = 2;
      });
-   else
+   if(num_question<20)
      setState(() {
        pattern_type = 1;
      });
 
 
-   final String url = 'https://915278655145.ngrok.io/answ/';
+   final String url = 'https://78f968f094fa.ngrok.io/answ/';
 
    // Converting to JSON Format
    json_frmt data = json_frmt(
@@ -264,7 +265,7 @@ int num_q_chk(){
         //For Even Spacing of Rows
         padding: const EdgeInsets.only(left: 0, top: 40, right: 6,bottom: 70),
         //How many Number of questions
-        itemCount: num_q_chk()+1,
+        itemCount: num_q_chk(),
         //required constructor
         itemBuilder: (BuildContext context, int index) {
           // Since ibackgroundColor: global_color,ndex starts from 0

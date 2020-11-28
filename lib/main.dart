@@ -92,10 +92,10 @@ class _HomePageState extends State<HomePage> {
       //Making a AppBar
       appBar: AppBar(
         backgroundColor: global_color,
-        title: Text("OMR"),
+        title: Text(''),
         leading: GestureDetector(
           onTap: switch_theme,
-          child: Icon(Icons.wb_sunny_outlined),
+          child: Icon( (dark_bool == true ) ? Icons.wb_sunny : Icons.wb_sunny_outlined),
         ),
 
       ),
