@@ -1,8 +1,8 @@
 
-## Libraries Used:
+# Libraries Used:
 
 
-# Python
+## Python
 
 * Numpy
 * CV2
