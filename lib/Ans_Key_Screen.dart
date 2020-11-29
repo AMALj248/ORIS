@@ -140,13 +140,80 @@ void marks_inc()
      setState(() {
        pattern_type = 2;
      });
-   if(num_question<20)
+   if(num_question<=20)
      setState(() {
        pattern_type = 1;
      });
 
 
-   final String url = 'https://78f968f094fa.ngrok.io/answ/';
+
+   // To make sure no hidden questions are selected
+   var tmp_list=[];
+
+   // A option
+    for(var i=0; i<a_list.length;i++) {
+      if(a_list[i]>num_question) {
+        print("Hidden Value found A${a_list[i]}");
+        tmp_list.add(a_list[i]);
+      }
+       }
+
+    for(var i=0;i<tmp_list.length;i++)
+       a_list.remove(tmp_list[i]);
+
+   tmp_list.clear();
+     // B option
+     for(var i=0; i<b_list.length;i++) {
+       if(b_list[i]>num_question) {
+         print("Hidden Value found B${b_list[i]}");
+         tmp_list.add(b_list[i]);
+       }
+     }
+
+     for(var i=0;i<tmp_list.length;i++)
+       b_list.remove(tmp_list[i]);
+
+   tmp_list.clear();
+     // C option
+     for(var i=0; i<c_list.length;i++) {
+       if (c_list[i] > num_question) {
+         print("Hidden Value found C${c_list[i]}");
+         tmp_list.add(c_list[i]);
+       }
+     }
+
+     for(var i=0;i<tmp_list.length;i++)
+       c_list.remove(tmp_list[i]);
+
+   tmp_list.clear();
+     // D option
+     for(var i=0; i<d_list.length;i++) {
+       if (d_list[i] > num_question) {
+         print("Hidden Value found D ${d_list[i]}");
+         tmp_list.add(d_list[i]);
+       }
+     }
+
+     for(var i=0;i<tmp_list.length;i++)
+       d_list.remove(tmp_list[i]);
+
+   tmp_list.clear();
+   // Negative option
+     for(var i=0; i<neg_list.length;i++) {
+       if (neg_list[i] > num_question) {
+         print("Hidden Value found Ngl ${neg_list[i]}");
+         tmp_list.add(neg_list[i]);
+       }
+     }
+
+     for(var i=0;i<tmp_list.length;i++)
+       neg_list.remove(tmp_list[i]);
+
+
+
+
+
+   final String url = 'https://coderino.team/answ/';
 
    // Converting to JSON Format
    json_frmt data = json_frmt(
@@ -190,7 +257,7 @@ void marks_inc()
 int num_q_chk(){
     if (num_question == null)
       setState(() {
-        num_question=19;
+        num_question=20;
       });
     return num_question;
 }

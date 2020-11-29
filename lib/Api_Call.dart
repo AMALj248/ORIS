@@ -69,7 +69,7 @@ Future<void> ans_get() async {
   print("API CALLED");
   print("Receiving Analytics");
   // API URL
-  final String url_anaytics = 'https://78f968f094fa.ngrok.io/analytics/';
+  final String url_anaytics = 'https://coderino.team/analytics/';
 
   // Post Request
   try {

@@ -98,8 +98,8 @@ var data_points = Stud_data_graph.getData();
                       titlesData: LineTitles.getTitles(),
                       minX: 0,
                       maxX: length_data_pts.toDouble(),
-                      minY: 0,
-                      maxY: analysis_data['Enroll_id'].length.toDouble(),
+                      minY: 0.0,
+                      maxY: analysis_data['Enroll_id'].length.toDouble()+1,
                       gridData: FlGridData(show: true),
                       lineBarsData: [
                         // DataPoints
@@ -113,7 +113,7 @@ var data_points = Stud_data_graph.getData();
 
                     ],
                           // To Smooth out curve
-                          isCurved: true,
+                          isCurved: false,
                           // Color of Line
                           colors: gradient_clr,
                           // Thickness of Line

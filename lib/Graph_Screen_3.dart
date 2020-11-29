@@ -75,7 +75,7 @@ SingleChildScrollView databody() {
 
             // Cell 2
             DataCell(
-              Text (user.Accuracy.toString()),
+              Text (user.Accuracy.toStringAsFixed(2)),
             ),
 
             // Cell 2
