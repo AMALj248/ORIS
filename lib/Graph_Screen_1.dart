@@ -137,7 +137,7 @@ var data_points = Stud_data_graph.getData();
                       .height * 0.4,
                   padding: EdgeInsets.only(left: 5, top: 35),
                   child: (
-                      Text("Class Average   ${analysis_data['Avg_Marks'].toString()}")
+                      Text("Class Average: ${analysis_data['Avg_Marks'].toString()}")
 
                   )
 
@@ -157,7 +157,7 @@ var data_points = Stud_data_graph.getData();
                       .height * 0.4,
                   padding: EdgeInsets.only(left: 5, top: 35),
                   child: (
-                      Text("Class Accuracy  ${analysis_data['Class_Accuracy'].toString()}")
+                      Text("Class Accuracy: ${analysis_data['Class_Accuracy'].toString()}%")
                   )
               ),
 
@@ -175,7 +175,7 @@ var data_points = Stud_data_graph.getData();
                       .height * 0.4,
                   padding:EdgeInsets.only(left: 5, top: 35),
                   child: (
-                      Text("Total Test Takers  ${analysis_data['Enroll_id'].length.toString()}")
+                      Text("Total Test Takers: ${analysis_data['Enroll_id'].length.toString()}")
 
 
                   )

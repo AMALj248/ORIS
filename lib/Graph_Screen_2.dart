@@ -73,7 +73,7 @@ SingleChildScrollView databody() {
           ),
 
           DataColumn(
-            label: Text("Mistakes"),
+            label: Text("-ve Attempt"),
             numeric: false,
             tooltip: 'OMR Filling Error Made',
           ),
