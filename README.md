@@ -1,4 +1,13 @@
-# test_full_app
 
-A Test Project to see how far i can push my Flutter App Skills
+## Libraries Used:
+
+
+# Python
+
+* Numpy
+* CV2
+* Uvicorn
+* FastAPI
+* Urllib
+* Requests
 
