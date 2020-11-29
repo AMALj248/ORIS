@@ -1,6 +1,8 @@
 
 # Libraries Used:
 
+## Flutter
+
 
 ## Python
 
@@ -11,3 +13,9 @@
 * Urllib
 * Requests
 
+
+## Storage Used
+Firebase
+
+## API Hosted
+AWS
