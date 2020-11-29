@@ -21,12 +21,12 @@
 
 ## Python
 
-* Numpy
-* CV2
-* Uvicorn
-* FastAPI
-* Urllib
-* Requests
+* Numpy 1.17.4
+* CV2 4.2.0.34
+* Uvicorn 0.11.5
+* FastAPI 0.59.0
+* Urllib 1.22
+* Requests 2.25.0
 
 
 ## Storage Used
