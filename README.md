@@ -1,5 +1,5 @@
 # Images
-![WhatsApp Image 2020-11-29 at 9.57.23 PM.jpg](WhatsApp Image 2020-11-29 at 9.57.23 PM.jpg.png)
+![WhatsApp Image 2020-11-29 at 9.57.23 PM.jpg](WhatsApp Image 2020-11-29 at 9.57.23 PM.jpg)
 
 
 # PPT
