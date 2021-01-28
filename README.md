@@ -1,5 +1,5 @@
 # Images
-![alt text](https://github.com/[AMALJ248]/[ORIS]/blob/[ss oris]/WhatsApp Image 2020-11-29 at 9.57.23 PM.jpg?raw=true)
+![WhatsApp Image 2020-11-29 at 9.57.23 PM.jpg](WhatsApp Image 2020-11-29 at 9.57.23 PM.jpg.png)
 
 
 # PPT
