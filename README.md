@@ -1,6 +1,3 @@
-# Images
-![WhatsApp Image 2020-11-29 at 9.57.23 PM.jpg](WhatsApp Image 2020-11-29 at 9.57.23 PM.jpg)
-
 
 # PPT
 https://he-s3.s3.amazonaws.com/media/sprint/hack-ed-v10/team/919067/599da63oris.pdf
