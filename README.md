@@ -1,6 +1,11 @@
+# PPT
+https://he-s3.s3.amazonaws.com/media/sprint/hack-ed-v10/team/919067/599da63oris.pdf
+
+# Youtube Link
+https://www.youtube.com/watch?v=P0zYchJK6Cg&feature=youtu.be
+
 
 # Libraries Used:
-
 ## Flutter
 * camera:
 * image_cropper: ^1.3.1
